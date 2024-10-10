@@ -5,12 +5,11 @@ services:
   app_proxy:
     environment:
       # The format here is: <app-id>_<docker-service-name>_1
-      APP_HOST: rnwy_server_1  # Updated service name
+      APP_HOST: rnwy-kiwix_server_1  # Updated service name
       APP_PORT: 8080                   # Default Kiwix port
 
   server:
     image: ghcr.io/kiwix/kiwix-serve:latest  # Kiwix-serve image
-    user: "1000:1000"
     init: true
     ports:
       - "8080:8080"  # Mapping host port 8080 to container port 80
