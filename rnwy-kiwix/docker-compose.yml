@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+
+  app_proxy:
+    environment:
+      # The format here is: <app-id>_<docker-service-name>_1
+      APP_HOST: kiwix-serve_server_1  # Updated service name
+      APP_PORT: 80                    # Default Kiwix port
+
+  server:
+    image: ghcr.io/kiwix/kiwix-serve:3.7.0  # Kiwix-serve image
+    user: "1000:1000"
+    init: true
+    ports:
+      - "8080:80"  # Mapping host port 8080 to container port 80
+    volumes:
+      - ./data:/data  # Mount a data directory (optional)
+    restart: unless-stopped  # Automatically restart the container unless stopped manually
